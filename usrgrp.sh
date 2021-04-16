@@ -49,7 +49,7 @@ afegr(){
 		read usuario
 	done
 	echo "$usuario"
-	grupo="no"
+	grupo=" "
 	until  grep -w -q "$grupo" /etc/group
 	do
 		echo "Grupo(asegurat que existeix): "
@@ -64,24 +64,24 @@ afegr(){
 	fi
 }
 esbgr(){
-	until id "$usuario" > /dev/null 2>&1
+	until id "$usuario02" > /dev/null 2>&1
 	do
 		echo "Usuario(asegurat que existeix): "
-		read usuario
+		read usuario02
 	done
-	echo "$usuario"
-	grupo="no"
+	#echo "$usuario"
+	grupo=" "
 	until  grep -w -q "$grupo" /etc/group
 	do
 		echo "Grupo(asegurat que existeix): "
 		read grupo
 	done 
-	echo "$grupo"
+	#echo "$grupo"
 	
-	if sudo gpasswd -d "$usuario" "$grupo"   ;then
+	if sudo gpasswd -d "$usuario02" "$grupo"   ;then
 		echo "Usuari eliminat correctament"
 	else
-		echo "Usuari eliminat correctament"
+		echo "Usuari  no eliminat "
 	fi
 
 }
@@ -98,7 +98,7 @@ then
 	exit 1
 fi
 bucle="s"
-while [ $bucle = "s" ]
+while [[ $bucle == 's' ]]
 do
 	menu
 	read selc
@@ -109,33 +109,33 @@ do
 		clear
 		crusr
 		clear
-		echo "vols torna a executar alguna funcio?"
+		echo "vols torna a executar alguna funcio?(s/n)"
 		read bucle
 		;;
 
 	  b)
 		clear
 		cgrp
-		echo "vols torna a executar alguna funcio?"
+		echo "vols torna a executar alguna funcio?(s/n)"
 		read bucle
 		;;
 
 	  c)
 		clear
 		afegr
-		echo "vols torna a executar alguna funcio?"
+		echo "vols torna a executar alguna funcio?(s/n)"
 		read bucle
 		;;
 	  d)
 		clear
 		esbgr
-		echo "vols torna a executar alguna funcio?"
+		echo "vols torna a executar alguna funcio?(s/n)"
 		read bucle
 		;;
 
 	  *)
 		echo "Opcion no registrada"
-		echo "vols torna a executar alguna funcio?"
+		echo "vols torna a executar alguna funcio?(s/n)"
 		read bucle
 		;;
 	esac
